@@ -18,8 +18,6 @@
 #define BUTTON_FOUR A2
 #define BUTTON_START A4
 
-
-
 ChainableLED leds(3, 2, NUM_LEDS);
 
 Bounce debouncerOne = Bounce();
@@ -31,7 +29,7 @@ Bounce debouncerStart = Bounce();
 void setup()
 {
   Serial.begin(9600);
-  
+
   pinMode(LAMP_ONE, OUTPUT);
   pinMode(LAMP_TWO, OUTPUT);
   pinMode(LAMP_THREE, OUTPUT);
@@ -75,36 +73,66 @@ int lampState = HIGH;
 
 unsigned long lastChangeTime = 0;
 
+bool demoMode = false;
+bool failMode = false;
+bool successMode = false;
+bool proceedMode = false;
+
+int failPosition = 0;
+int proceedPosition = 0;
+int demoPosition = 0;
+
+unsigned long demoStartTime = 0;
+unsigned long failStartTime = 0;
+unsigned long successStartTime = 0;
+unsigned long proceedStartTime = 0;
+
 void loop()
 {
   bouncerUpdate();
 
   int buttonStart = debouncerStart.read();
 
+  if(demoMode) {
+    startSequence();
+    return;
+  }
+
+  if(proceedMode) {
+    proceed(0);
+    return;
+  }
+
+  if(failMode) {
+    fail();
+    return;
+  }
+
+  if(successMode) {
+    
+  }
+
   if(buttonStart == LOW) {
 
     Serial.print("start called");
 
     if(!statusStart) {
+      
       startSequence();
+      gamePosition = 1;
+
+      statusStart = 1;
+      return;
     }
-
-    gamePosition = 1;
-
-    statusStart = 1;
-
-    delay(1000);
   }
 
   if(statusStart) {
     game();
   }
-
 }
 
 void game()
 {
-  bouncerUpdate();
 
   int pressed = getPressedNumber();
 
@@ -138,12 +166,7 @@ void game()
           pressed = 0;
           return;
         } else {
-          delay(500);
-          bouncerUpdate();
-          setColorAll(0,0,0);
-          setDefault();
-          gamePosition = 2;
-          pressed = 0;
+          proceed(2);
           return;
         }
       }
@@ -160,11 +183,7 @@ void game()
           pressed = 0;
           return;
         } else {
-          delay(500);
-          bouncerUpdate();
-          setColorAll(0,0,0);
-          setDefault();
-          gamePosition = 3;
+          proceed(3);
           return;
         }
       }
@@ -181,11 +200,7 @@ void game()
           pressed = 0;
           return;
         } else {
-          delay(500);
-          bouncerUpdate();
-          setColorAll(0,0,0);
-          setDefault();
-          gamePosition = 4;
+          proceed(4);
           return;
         }
       }
@@ -202,11 +217,7 @@ void game()
           pressed = 0;
           return;
         } else {
-          delay(500);
-          bouncerUpdate();
-          setColorAll(0,0,0);
-          setDefault();
-          gamePosition = 5;
+          proceed(5);
           return;
         }
       }
@@ -223,11 +234,7 @@ void game()
           pressed = 0;
           return;
         } else {
-          delay(500);
-          bouncerUpdate();
-          setColorAll(0,0,0);
-          setDefault();
-          gamePosition = 6;
+          proceed(6);
           return;
         }
       }
@@ -239,16 +246,12 @@ void game()
     case 6: {
 
       if(pressed > 0) {
-        if(pressed != 1) {
+        if(pressed != 2) {
           fail();
           pressed = 0;
           return;
         } else {
-          delay(500);
-          bouncerUpdate();
-          setColorAll(0,0,0);
-          setDefault();
-          gamePosition = 7;
+          proceed(7);
           return;
         }
       }
@@ -280,64 +283,62 @@ void game()
 
 void startSequence()
 {
-  int delayBig = 2000;
-  int delaySmall = 50;
-  bouncerUpdate();
   byte i = 0;
+  int diff = millis() - demoStartTime;
+  
+  if(!demoMode) {
+      demoStartTime = millis();
+      demoMode = true;
+      setColor(i);
+      digitalWrite(LAMP_ONE, HIGH);
+  }
 
-  setColor(i);
-  digitalWrite(LAMP_ONE, HIGH);
-  delay(delayBig);
-  setDefault();
-  setColorNone(i);
-  delay(delaySmall);
+  if(demoPosition > 10) {
+    if(diff > 2000) {
+      demoMode = false;
+    }
+    return;
+  }
 
-  bouncerUpdate();
+  if(demoPosition % 2) {
+    switch (demoPosition) {
+      case 0: {
+        i = 0;
+        break;
+      }
+      case 2: {
+        i = 3;
+      }
+      case 4: {
+        i = 2;
+        break;
+      }
+      case 6: {
+        i = 1;
+        break;
+      }
+      case 8: {
+        i = 0;
+        break;
+      }
+      case 10: {
+        i = 1;
+        break;
+      }
+    }
+    if(diff > 2000) {
+      demoPosition ++;
+      setDefault();
+      setColorNone(i);
+      demoStartTime = millis();
+    }
+  } else {
+    if(diff > 50) {
+      demoPosition ++;
+      demoStartTime = millis();
+    }
+  }
 
-  i = 3;
-
-  setColor(i);
-  digitalWrite(LAMP_TWO, HIGH);
-  delay(delayBig);
-  setDefault();
-  setColorNone(i);
-  delay(delaySmall);
-
-  i = 2;
-
-  setColor(i);
-  digitalWrite(LAMP_THREE, HIGH);
-  delay(delayBig);
-  setDefault();
-  setColorNone(i);
-  delay(delaySmall);
-
-  i = 1;
-
-  setColor(i);
-  digitalWrite(LAMP_FOUR, HIGH);
-  delay(delayBig);
-  setDefault();
-  setColorNone(i);
-  delay(delaySmall);
-
-  i = 0;
-
-  setColor(i);
-  digitalWrite(LAMP_FIVE, HIGH);
-  delay(delayBig);
-  setDefault();
-  setColorNone(i);
-  delay(delaySmall);
-
-  i = 1;
-
-  setColor(i);
-  digitalWrite(LAMP_SIX, HIGH);
-  delay(delayBig);
-  setDefault();
-  setColorNone(i);
-  delay(delaySmall);
 }
 
 void setColorNone(byte position)
@@ -390,7 +391,7 @@ void setDefault()
   digitalWrite(LAMP_FOUR, LOW);
   digitalWrite(LAMP_FIVE, LOW);
   digitalWrite(LAMP_SIX, LOW);
-  digitalWrite(RELAY_ONE, LOW);
+  digitalWrite(RELAY_ONE, HIGH);
 }
 
 void setGameStatus(int a, int b, int c, int d, int e, int f)
@@ -458,33 +459,77 @@ int getPressedNumber()
 
 void success()
 {
-  setColorAll(0,255,0);
-  digitalWrite(RELAY_ONE, HIGH);
+  if(!successMode) {
+    successMode = true;
+    successStartTime = millis();
+    setColorAll(0,255,0);
+    digitalWrite(RELAY_ONE, LOW);
+    return;
+  }
 
-  delay(5000);
-  digitalWrite(RELAY_ONE, LOW);
-  setDefault();
+  int diff = millis() - successStartTime;
+
+  if(diff > 5000) {
+    digitalWrite(RELAY_ONE, HIGH);
+    setDefault();
+    successMode = false;
+  }
 }
 
 void fail()
 {
-  statusStart = 0;
+  if (!failMode) {
+    failMode = true;
+    failStartTime = millis();
 
-  setDefault();
+    statusStart = 0;
 
-  setColorAll(255,0,0);
-  delay(200);
-  setColorAll(0,0,0);
-  delay(200);
-  setColorAll(255,0,0);
-  delay(200);
-  setColorAll(0,0,0);
-  delay(200);
-  setColorAll(255,0,0);
-  delay(200);
-  setColorAll(0,0,0);
-  delay(1000);
-  setColorAll(0,0,0);
+    setDefault();
+
+    setColorAll(255,0,0);
+  }
+
+  int diff = millis() - failStartTime;
+
+  if(diff > 200) {
+    if (failPosition > 5) {
+      if(diff > 1000) {
+        failMode = false;
+      }
+    } else {
+      if (failPosition % 2) {
+        setColorAll(255,0,0);
+        failPosition++;
+        failStartTime = millis();
+      } else {
+        setColorAll(0,0,0);
+        failPosition++;
+        failStartTime = millis();
+      }
+    }
+  }
+}
+
+void proceed(int pos) 
+{
+  if(!proceedMode) {
+    proceedMode = true;
+    proceedStartTime = millis();
+
+    proceedPosition = pos;
+  }
+
+  int diff = millis() - proceedStartTime;
+
+  if(diff > 500) {
+    proceedStartTime = millis();
+    proceedMode = false;
+
+    bouncerUpdate();
+    setColorAll(0,0,0);
+    setDefault();
+    gamePosition = proceedPosition;
+  }
 }
 
 void setColorAll(int r, int g, int b)
