@@ -112,7 +112,8 @@ void loop()
   }
 
   if(successMode) {
-    
+    success();
+    return;
   }
 
   if(buttonStart == LOW) {
