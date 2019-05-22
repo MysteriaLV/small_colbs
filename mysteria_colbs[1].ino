@@ -1,8 +1,10 @@
 #include <Bounce2.h>
+#include "colbs_modbus.h"
 
 #include <ChainableLED.h>
 
 #define NUM_LEDS  4
+
 
 #define LAMP_ONE 7
 #define LAMP_TWO 5 //5
@@ -90,6 +92,7 @@ unsigned long proceedStartTime = 0;
 void loop()
 {
   bouncerUpdate();
+  modbus_loop();
 
   int buttonStart = debouncerStart.read();
 
@@ -109,7 +112,8 @@ void loop()
   }
 
   if(successMode) {
-    
+    success();
+    return;
   }
 
   if(buttonStart == LOW) {
@@ -459,6 +463,8 @@ int getPressedNumber()
 
 void success()
 {
+  modbus_set(COMPLETE, 1);
+  
   if(!successMode) {
     successMode = true;
     successStartTime = millis();
@@ -478,6 +484,8 @@ void success()
 
 void fail()
 {
+  modbus_set(COMPLETE, 0);
+  
   if (!failMode) {
     failMode = true;
     failStartTime = millis();
