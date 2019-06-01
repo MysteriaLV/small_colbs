@@ -1,15 +1,13 @@
 #include "colbs_modbus.h"
 
-#define USE_SOFTWARE_SERIAL 1
-
 #ifdef USE_SOFTWARE_SERIAL
 
 #include <ModbusSerial.h>
 
 ModbusSerial mb;
 
-#define SSerialRX        10  //Serial3 Receive pin (just a reference, can't be changed)
-#define SSerialTX        11 //Serial3 Transmit pin (just a reference, can't be changed)
+#define SSerialRX        10   //SoftwareSerial Receive pin
+#define SSerialTX        11   //SoftwareSerial Transmit pin
 #define SSerialTxControl 12   //RS485 Direction control
 SoftwareSerial RS485Serial(SSerialRX, SSerialTX); // RX, TX
 #endif
@@ -46,19 +44,19 @@ ModbusIP mb;
 // Action handler. Add all your actions mapped by action_id in rs485_node of Lua script
 void process_actions() {
     if (mb.Hreg(ACTIONS) == 0)
-	return;
+        return;
 
     switch (mb.Hreg(ACTIONS)) {
-	case 1 : // Put here code for Reset
-	    Serial.println("[Reset] action fired");
-	    fail();
-	    break;
-	case 2 : // Put here code for Complete
-	    Serial.println("[Complete] action fired");
-      success();
-	    break;
-	default:
-	    break;
+        case 1 : // Put here code for Reset
+            Serial.println("[Reset] action fired");
+            fail();
+            break;
+        case 2 : // Put here code for Complete
+            Serial.println("[Complete] action fired");
+            success();
+            break;
+        default:
+            break;
     }
 
     // Signal that action was processed

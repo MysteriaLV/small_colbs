@@ -1,5 +1,5 @@
-#ifndef GESTURES_MODBUS_H
-#define GESTURES_MODBUS_H
+#ifndef COLBS_MODBUS_H
+#define COLBS_MODBUS_H
 
 #define USE_HOLDING_REGISTERS_ONLY
 #include <Arduino.h>
@@ -22,4 +22,4 @@ enum
 
   TOTAL_ERRORS     // leave this one, error counter
 };
-#endif //GESTURES_MODBUS_H
+#endif //COLBS_MODBUS_H
