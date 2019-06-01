@@ -9,12 +9,12 @@
 
 
 #define LAMP_ONE_PIN   7
-#define LAMP_TWO_PIN   5 //5
-#define LAMP_THREE_PIN 6 //6
-#define LAMP_FOUR_PIN  9 //10
-#define LAMP_FIVE_PIN  4 // 5
-#define LAMP_SIX_PIN   8 //4
-#define RELAY_ONE      10 //8
+#define LAMP_TWO_PIN   5
+#define LAMP_THREE_PIN 6
+#define LAMP_FOUR_PIN  9
+#define LAMP_FIVE_PIN  4
+#define LAMP_SIX_PIN   8
+#define RELAY_ONE_PIN  13
 
 #define BUTTON_ONE_PIN   A0
 #define BUTTON_TWO_PIN   A3
@@ -92,7 +92,7 @@ void setDefault() {
     digitalWrite(LAMP_FOUR_PIN, LOW);
     digitalWrite(LAMP_FIVE_PIN, LOW);
     digitalWrite(LAMP_SIX_PIN, LOW);
-    digitalWrite(RELAY_ONE, HIGH);
+    digitalWrite(RELAY_ONE_PIN, HIGH);
 }
 
 
@@ -362,14 +362,14 @@ void success() {
         successMode = true;
         successStartTime = millis();
         setColorAll(0, 255, 0);
-        digitalWrite(RELAY_ONE, LOW);
+        digitalWrite(RELAY_ONE_PIN, LOW);
         return;
     }
 
     long diff = millis() - successStartTime;
 
     if (diff > 5000) {
-        digitalWrite(RELAY_ONE, HIGH);
+        digitalWrite(RELAY_ONE_PIN, HIGH);
         setDefault();
         successMode = false;
     }
@@ -420,7 +420,7 @@ void setup() {
     pinMode(LAMP_FOUR_PIN, OUTPUT);
     pinMode(LAMP_FIVE_PIN, OUTPUT);
     pinMode(LAMP_SIX_PIN, OUTPUT);
-    pinMode(RELAY_ONE, OUTPUT);
+    pinMode(RELAY_ONE_PIN, OUTPUT);
 
     pinMode(BUTTON_ONE_PIN, INPUT_PULLUP);
     pinMode(BUTTON_TWO_PIN, INPUT_PULLUP);
