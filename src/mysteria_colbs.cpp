@@ -8,7 +8,7 @@
 #define LEDS_DATA_PIN 2
 
 
-#define LAMP_ONE_PIN   7
+#define LAMP_ONE_PIN   7 // 4-9
 #define LAMP_TWO_PIN   5
 #define LAMP_THREE_PIN 6
 #define LAMP_FOUR_PIN  9

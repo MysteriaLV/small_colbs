@@ -6,8 +6,8 @@
 
 ModbusSerial mb;
 
-#define SSerialRX        10   //SoftwareSerial Receive pin
-#define SSerialTX        11   //SoftwareSerial Transmit pin
+#define SSerialRX        10   //SoftwareSerial Receive pin -> Modbus TX
+#define SSerialTX        11   //SoftwareSerial Transmit pin -> Modbux RX
 #define SSerialTxControl 12   //RS485 Direction control
 SoftwareSerial RS485Serial(SSerialRX, SSerialTX); // RX, TX
 #endif
