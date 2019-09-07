@@ -8,13 +8,13 @@
 #define LEDS_DATA_PIN 2
 
 
-#define LAMP_ONE_PIN   7 // 4-9
+#define LAMP_ONE_PIN   7 // 4-9 + 13
 #define LAMP_TWO_PIN   5
 #define LAMP_THREE_PIN 6
-#define LAMP_FOUR_PIN  9
+#define LAMP_FOUR_PIN  13
 #define LAMP_FIVE_PIN  4
 #define LAMP_SIX_PIN   8
-#define RELAY_ONE_PIN  13
+#define RELAY_ONE_PIN  9
 
 #define BUTTON_ONE_PIN   A0
 #define BUTTON_TWO_PIN   A3
@@ -290,8 +290,6 @@ void game() {
     }
 
 }
-
-
 
 
 // 2, 4, 3, 4, 1
