@@ -295,10 +295,11 @@ void game() {
 
 // 2, 4, 3, 4, 1
 void startSequence() {
-    
+   
     long diff = millis() - demoStartTime;
 
     if (!demoMode) {
+        Serial.print("demo entry - start");
         startSequencePosition = 0;
         demoStartTime = millis();
         demoMode = true;
@@ -308,6 +309,7 @@ void startSequence() {
 
     if (demoPosition > 10) {
         if (diff > 2000) {
+            Serial.print("demo entry - end");
             demoMode = false;
         }
         return;
@@ -353,7 +355,7 @@ void startSequence() {
             }
         }
         if (diff > 2000) {
-//             Serial.print(sprintf("demo position changed %s", startSequencePosition));
+            Serial.print(sprintf("demo position changed %s", startSequencePosition));
             demoPosition++;
             setDefault();
             setColorNone(startSequencePosition);
@@ -488,7 +490,7 @@ void loop() {
 
     if (buttonStart == LOW) {
 
-        Serial.print("start called");
+        Serial.print("start called - new");
 
         if (!statusStart) {
 
