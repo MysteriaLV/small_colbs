@@ -328,7 +328,7 @@ void startSequence() {
                 break;
             }
             case 4: {
-                i = 2;
+                startSequencePosition = 2;
                 setColor(startSequencePosition);
                 digitalWrite(LAMP_THREE_PIN, HIGH);
                 break;
