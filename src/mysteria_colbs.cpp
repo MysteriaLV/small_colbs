@@ -320,39 +320,57 @@ void startSequence() {
     if ((demoPosition % 2) == 1) {
         switch (demoPosition) {
             case 0: {
-                startSequencePosition = 0;
-                setColor(startSequencePosition);
-                digitalWrite(LAMP_ONE_PIN, HIGH);
+                if (startSequencePosition != 0) {
+                    Serial.println("light 0");
+                    startSequencePosition = 0;
+                    setColor(startSequencePosition);
+                    digitalWrite(LAMP_ONE_PIN, HIGH);
+                }
                 break;
             }
             case 2: {
-                startSequencePosition = 3;
-                setColor(startSequencePosition);
-                digitalWrite(LAMP_TWO_PIN, HIGH);
+                if (startSequencePosition != 3) {
+                    Serial.println("light 3");
+                    startSequencePosition = 3;
+                    setColor(startSequencePosition);
+                    digitalWrite(LAMP_TWO_PIN, HIGH);
+                }
                 break;
             }
             case 4: {
-                startSequencePosition = 2;
-                setColor(startSequencePosition);
-                digitalWrite(LAMP_THREE_PIN, HIGH);
+                if (startSequencePosition != 2) {
+                    Serial.println("light 2");
+                    startSequencePosition = 2;
+                    setColor(startSequencePosition);
+                    digitalWrite(LAMP_THREE_PIN, HIGH);
+                }
                 break;
             }
             case 6: {
-                startSequencePosition = 1;
-                setColor(startSequencePosition);
-                digitalWrite(LAMP_FOUR_PIN, HIGH);
+                if (startSequencePosition != 1) {
+                    Serial.println("light 1");
+                    startSequencePosition = 1;
+                    setColor(startSequencePosition);
+                    digitalWrite(LAMP_FOUR_PIN, HIGH);
+                }
                 break;
             }
-            case 8: {              
-                startSequencePosition = 0;
-                setColor(startSequencePosition);
-                digitalWrite(LAMP_FIVE_PIN, HIGH);
+            case 8: {
+                if (startSequencePosition != 0) {
+                    Serial.println("light 0");
+                    startSequencePosition = 0;
+                    setColor(startSequencePosition);
+                    digitalWrite(LAMP_FIVE_PIN, HIGH);
+                }
                 break;
             }
             case 10: {
-                startSequencePosition = 1;
-                setColor(startSequencePosition);
-                digitalWrite(LAMP_SIX_PIN, HIGH);
+                if (startSequencePosition != 1) {
+                    Serial.println("light 1");
+                    startSequencePosition = 1;
+                    setColor(startSequencePosition);
+                    digitalWrite(LAMP_SIX_PIN, HIGH);
+                }
                 break;
             }
         }
