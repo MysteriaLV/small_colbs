@@ -157,7 +157,7 @@ void game() {
     int pressed = getPressedNumber();
 
     if (pressed > 0) {
-        Serial.println(sprintf("button pressed %s"), pressed));
+        Serial.println(sprintf("button pressed %s", pressed));
         if (pressed <= 4) {
             setColor(pressed - 1);
         } else {
