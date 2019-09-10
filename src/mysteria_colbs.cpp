@@ -353,6 +353,7 @@ void startSequence() {
             }
         }
         if (diff > 2000) {
+//             Serial.print(sprintf("demo position changed %s", startSequencePosition));
             demoPosition++;
             setDefault();
             setColorNone(startSequencePosition);
