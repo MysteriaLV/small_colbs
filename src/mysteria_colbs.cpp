@@ -157,7 +157,7 @@ void game() {
     int pressed = getPressedNumber();
 
     if (pressed > 0) {
-        Serial.println(pressed);
+        Serial.println(sprintf("button pressed %s"), pressed));
         if (pressed <= 4) {
             setColor(pressed - 1);
         } else {
@@ -316,7 +316,7 @@ void startSequence() {
         return;
     }
 
-    if (demoPosition % 2) {
+    if ((demoPosition % 2) == 1) {
         switch (demoPosition) {
             case 0: {
                 startSequencePosition = 0;
@@ -356,7 +356,7 @@ void startSequence() {
             }
         }
         if (diff > 2000) {
-            Serial.println(sprintf("demo position changed %s", startSequencePosition));
+            Serial.println(sprintf("demo position changed %d", startSequencePosition));
             demoPosition++;
             setDefault();
             setColorNone(startSequencePosition);
@@ -364,7 +364,7 @@ void startSequence() {
         }
     } else {
         if (diff > 50) {
-            Serial.println("demo position increase");
+            Serial.println(sprintf("demo position increase %d", demoPosition));
             demoPosition++;
             demoStartTime = millis();
         }
