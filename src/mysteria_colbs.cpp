@@ -411,6 +411,7 @@ void success() {
     if (diff > 5000) {
         digitalWrite(RELAY_ONE_PIN, LOW);
         setDefault();
+        setColorAll(0, 0, 0);
         successMode = false;
     }
 }
