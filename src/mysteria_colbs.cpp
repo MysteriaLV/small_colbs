@@ -142,6 +142,10 @@ void proceed(int pos) {
     }
 }
 
+void setColorRGB(byte position, byte r, byte g, byte  b) {
+    leds.setColorRGB(position, r, g, b);
+}
+
 void setColorNone(byte position) {
     leds.setColorRGB(position, 0, 0, 0);
 }
