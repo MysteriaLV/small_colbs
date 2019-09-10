@@ -313,6 +313,7 @@ void startSequence() {
     if (demoPosition > 11) {
         if (diff > 2000) {
             Serial.println("demo entry - end");
+            setColorAll(0, 0, 0);
             demoPosition = 0;
             demoMode = false;
         }
@@ -433,10 +434,10 @@ void fail() {
 
     long diff = millis() - failStartTime;
 
-    if (diff > 200) {
+    if (diff > 500) {
         if (failPosition > 5) {
-            if (diff > 1000) {
-                setColorAll(0, 0, 0);
+            if (diff > 2000) {
+                setColor(1, 0, 0, 0);
                 Serial.println("exit fail loop");
                 failMode = false;
             }
@@ -444,12 +445,12 @@ void fail() {
             Serial.println("fail loop");
             if ((failPosition % 2) == 1) {
                 Serial.println("set fail red");
-                setColorAll(0, 255, 0);
+                setColor(1, 255, 0, 0);
                 failPosition++;
                 failStartTime = millis();
             } else {
                 Serial.println("set fail off");
-                setColorAll(0, 0, 0);
+                setColor(1, 0, 0, 0);
                 failPosition++;
                 failStartTime = millis();
             }
