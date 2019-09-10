@@ -68,7 +68,7 @@ void modbus_set(word event, word value) {
 }
 
 void modbus_setup() {
-    Serial.println("ModBus Slave COLBS:8 for lua/Aliens.lua");
+    Serial.println("ModBus Slave COLBS:4 for lua/Aliens.lua");
 
 #ifdef EMULATE_RS3485_POWER_PINS
     pinMode(SSerialVCC, OUTPUT);
@@ -80,7 +80,7 @@ void modbus_setup() {
 
 #ifndef USE_ESP8266_TCP
     mb.config(&RS485Serial, 31250, SSerialTxControl);
-    mb.setSlaveId(8);
+    mb.setSlaveId(4);
 #else
     mb.config("Aliens Room", "123123123");
     WiFi.config(IPAddress(3), IPAddress(), IPAddress(), IPAddress(), IPAddress());
