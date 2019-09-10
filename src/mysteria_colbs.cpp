@@ -320,12 +320,11 @@ void startSequence() {
     if ((demoPosition % 2) == 1) {
         switch (demoPosition) {
             case 1: {
-                if (startSequencePosition != 0) {
-                    Serial.println("light 0");
-                    startSequencePosition = 0;
-                    setColor(startSequencePosition);
-                    digitalWrite(LAMP_ONE_PIN, HIGH);
-                }
+                Serial.println("light 0");
+                startSequencePosition = 0;
+                setColor(startSequencePosition);
+                digitalWrite(LAMP_ONE_PIN, HIGH);
+
                 break;
             }
             case 3: {
