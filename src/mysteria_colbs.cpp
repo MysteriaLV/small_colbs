@@ -42,6 +42,7 @@ const long interval = 1000;
 
 int statusStart = 0;
 byte lampState = HIGH;
+byte startSequencePosition = 0;
 
 bool demoMode = false;
 bool failMode = false;
@@ -294,13 +295,14 @@ void game() {
 
 // 2, 4, 3, 4, 1
 void startSequence() {
-    byte i = 0;
+    
     long diff = millis() - demoStartTime;
 
     if (!demoMode) {
+        startSequencePosition = 0;
         demoStartTime = millis();
         demoMode = true;
-        setColor(i);
+        setColor(startSequencePosition);
         digitalWrite(LAMP_ONE_PIN, HIGH);
     }
 
@@ -314,38 +316,38 @@ void startSequence() {
     if (demoPosition % 2) {
         switch (demoPosition) {
             case 0: {
-                i = 0;
-                setColor(i);
+                startSequencePosition = 0;
+                setColor(startSequencePosition);
                 digitalWrite(LAMP_ONE_PIN, HIGH);
                 break;
             }
             case 2: {
-                i = 3;
-                setColor(i);
+                startSequencePosition = 3;
+                setColor(startSequencePosition);
                 digitalWrite(LAMP_TWO_PIN, HIGH);
                 break;
             }
             case 4: {
                 i = 2;
-                setColor(i);
+                setColor(startSequencePosition);
                 digitalWrite(LAMP_THREE_PIN, HIGH);
                 break;
             }
             case 6: {
-                i = 1;
-                setColor(i);
+                startSequencePosition = 1;
+                setColor(startSequencePosition);
                 digitalWrite(LAMP_FOUR_PIN, HIGH);
                 break;
             }
             case 8: {              
-                i = 0;
-                setColor(i);
+                startSequencePosition = 0;
+                setColor(startSequencePosition);
                 digitalWrite(LAMP_FIVE_PIN, HIGH);
                 break;
             }
             case 10: {
-                i = 1;
-                setColor(i);
+                startSequencePosition = 1;
+                setColor(startSequencePosition);
                 digitalWrite(LAMP_SIX_PIN, HIGH);
                 break;
             }
@@ -353,7 +355,7 @@ void startSequence() {
         if (diff > 2000) {
             demoPosition++;
             setDefault();
-            setColorNone(i);
+            setColorNone(startSequencePosition);
             demoStartTime = millis();
         }
     } else {
