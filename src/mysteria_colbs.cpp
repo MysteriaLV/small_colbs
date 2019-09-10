@@ -299,17 +299,18 @@ void startSequence() {
     long diff = millis() - demoStartTime;
 
     if (!demoMode) {
-        Serial.print("demo entry - start");
+        Serial.println("demo entry - start");
         startSequencePosition = 0;
         demoStartTime = millis();
-        demoMode = true;
+        
         setColor(startSequencePosition);
         digitalWrite(LAMP_ONE_PIN, HIGH);
     }
 
     if (demoPosition > 10) {
         if (diff > 2000) {
-            Serial.print("demo entry - end");
+            Serial.println("demo entry - end");
+            demoPosition = 0;
             demoMode = false;
         }
         return;
@@ -355,7 +356,7 @@ void startSequence() {
             }
         }
         if (diff > 2000) {
-            Serial.print(sprintf("demo position changed %s", startSequencePosition));
+            Serial.println(sprintf("demo position changed %s", startSequencePosition));
             demoPosition++;
             setDefault();
             setColorNone(startSequencePosition);
@@ -489,16 +490,17 @@ void loop() {
     }
 
     if (buttonStart == LOW) {
-
-        Serial.print("start called - new");
-
         if (!statusStart) {
+            Serial.println("start called - new");
+            demoMode = true;
 
             startSequence();
             gamePosition = 1;
 
             statusStart = 1;
             return;
+        } else {
+            Serial.println("start called - demo passed");
         }
     }
 
