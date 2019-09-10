@@ -308,7 +308,7 @@ void startSequence() {
         digitalWrite(LAMP_ONE_PIN, HIGH);
     }
 
-    if (demoPosition > 10) {
+    if (demoPosition > 11) {
         if (diff > 2000) {
             Serial.println("demo entry - end");
             demoPosition = 0;
@@ -319,7 +319,7 @@ void startSequence() {
 
     if ((demoPosition % 2) == 1) {
         switch (demoPosition) {
-            case 0: {
+            case 1: {
                 if (startSequencePosition != 0) {
                     Serial.println("light 0");
                     startSequencePosition = 0;
@@ -328,7 +328,7 @@ void startSequence() {
                 }
                 break;
             }
-            case 2: {
+            case 3: {
                 if (startSequencePosition != 3) {
                     Serial.println("light 3");
                     startSequencePosition = 3;
@@ -337,7 +337,7 @@ void startSequence() {
                 }
                 break;
             }
-            case 4: {
+            case 5: {
                 if (startSequencePosition != 2) {
                     Serial.println("light 2");
                     startSequencePosition = 2;
@@ -346,7 +346,7 @@ void startSequence() {
                 }
                 break;
             }
-            case 6: {
+            case 7: {
                 if (startSequencePosition != 1) {
                     Serial.println("light 1");
                     startSequencePosition = 1;
@@ -355,7 +355,7 @@ void startSequence() {
                 }
                 break;
             }
-            case 8: {
+            case 9: {
                 if (startSequencePosition != 0) {
                     Serial.println("light 0");
                     startSequencePosition = 0;
@@ -364,7 +364,7 @@ void startSequence() {
                 }
                 break;
             }
-            case 10: {
+            case 11: {
                 if (startSequencePosition != 1) {
                     Serial.println("light 1");
                     startSequencePosition = 1;
