@@ -364,6 +364,7 @@ void startSequence() {
         }
     } else {
         if (diff > 50) {
+            Serial.println("demo position increase");
             demoPosition++;
             demoStartTime = millis();
         }
