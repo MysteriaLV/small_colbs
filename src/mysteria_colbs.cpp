@@ -433,16 +433,20 @@ void fail() {
     long diff = millis() - failStartTime;
 
     if (diff > 200) {
+        Serial.println("fail loop");
         if (failPosition > 5) {
             if (diff > 1000) {
+                Serial.println("exit fail loop");
                 failMode = false;
             }
         } else {
-            if (failPosition % 2) {
+            if ((failPosition % 2) == 1) {
+                Serial.println("set fail red");
                 setColorAll(255, 0, 0);
                 failPosition++;
                 failStartTime = millis();
             } else {
+                Serial.println("set fail off");
                 setColorAll(0, 0, 0);
                 failPosition++;
                 failStartTime = millis();
