@@ -357,7 +357,7 @@ void startSequence() {
             }
         }
         if (diff > 2000) {
-            Serial.println("demo position increase inside")
+            Serial.println("demo position increase inside");
             Serial.println(sprintf("demo position changed %d", startSequencePosition));
             demoPosition++;
             setDefault();
@@ -366,7 +366,7 @@ void startSequence() {
         }
     } else {
         if (diff > 50) {
-            Serial.println("demo position increase")
+            Serial.println("demo position increase");
             Serial.println(demoPosition);
             demoPosition++;
             demoStartTime = millis();
