@@ -419,6 +419,7 @@ void fail() {
     modbus_set(COMPLETE, 0);
 
     if (!failMode) {
+        Serial.println("fail called");
         failMode = true;
         failStartTime = millis();
 
