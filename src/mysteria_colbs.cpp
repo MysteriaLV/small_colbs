@@ -93,7 +93,7 @@ void setDefault() {
     digitalWrite(LAMP_FOUR_PIN, LOW);
     digitalWrite(LAMP_FIVE_PIN, LOW);
     digitalWrite(LAMP_SIX_PIN, LOW);
-    digitalWrite(RELAY_ONE_PIN, HIGH);
+//     digitalWrite(RELAY_ONE_PIN, HIGH);
 }
 
 
@@ -131,6 +131,7 @@ void proceed(int pos) {
     long diff = millis() - proceedStartTime;
 
     if (diff > 500) {
+        Serial.println("procced to next step");
         proceedStartTime = millis();
         proceedMode = false;
 
@@ -157,7 +158,8 @@ void game() {
     int pressed = getPressedNumber();
 
     if (pressed > 0) {
-        Serial.println(sprintf("button pressed %s", pressed));
+        Serial.println("button pressed");
+        Serial.println(pressed);
         if (pressed <= 4) {
             setColor(pressed - 1);
         } else {
@@ -396,17 +398,18 @@ void success() {
     modbus_set(COMPLETE, 1);
 
     if (!successMode) {
+        Serial.println("end game - relay open");
         successMode = true;
         successStartTime = millis();
         setColorAll(0, 255, 0);
-        digitalWrite(RELAY_ONE_PIN, LOW);
+        digitalWrite(RELAY_ONE_PIN, HIGH);
         return;
     }
 
     long diff = millis() - successStartTime;
 
     if (diff > 5000) {
-        digitalWrite(RELAY_ONE_PIN, HIGH);
+        digitalWrite(RELAY_ONE_PIN, LOW);
         setDefault();
         successMode = false;
     }
