@@ -316,37 +316,37 @@ void startSequence() {
             case 0: {
                 i = 0;
                 setColor(i);
-                digitalWrite(LAMP_ONE, HIGH);
+                digitalWrite(LAMP_ONE_PIN, HIGH);
                 break;
             }
             case 2: {
                 i = 3;
                 setColor(i);
-                digitalWrite(LAMP_TWO, HIGH);
+                digitalWrite(LAMP_TWO_PIN, HIGH);
                 break;
             }
             case 4: {
                 i = 2;
                 setColor(i);
-                digitalWrite(LAMP_THREE, HIGH);
+                digitalWrite(LAMP_THREE_PIN, HIGH);
                 break;
             }
             case 6: {
                 i = 1;
                 setColor(i);
-                digitalWrite(LAMP_FOUR, HIGH);
+                digitalWrite(LAMP_FOUR_PIN, HIGH);
                 break;
             }
             case 8: {              
                 i = 0;
                 setColor(i);
-                digitalWrite(LAMP_FIVE, HIGH);
+                digitalWrite(LAMP_FIVE_PIN, HIGH);
                 break;
             }
             case 10: {
                 i = 1;
                 setColor(i);
-                digitalWrite(LAMP_SIX, HIGH);
+                digitalWrite(LAMP_SIX_PIN, HIGH);
                 break;
             }
         }
