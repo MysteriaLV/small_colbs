@@ -315,25 +315,38 @@ void startSequence() {
         switch (demoPosition) {
             case 0: {
                 i = 0;
+                setColor(i);
+                digitalWrite(LAMP_ONE, HIGH);
                 break;
             }
             case 2: {
                 i = 3;
+                setColor(i);
+                digitalWrite(LAMP_TWO, HIGH);
+                break;
             }
             case 4: {
                 i = 2;
+                setColor(i);
+                digitalWrite(LAMP_THREE, HIGH);
                 break;
             }
             case 6: {
                 i = 1;
+                setColor(i);
+                digitalWrite(LAMP_FOUR, HIGH);
                 break;
             }
-            case 8: {
+            case 8: {              
                 i = 0;
+                setColor(i);
+                digitalWrite(LAMP_FIVE, HIGH);
                 break;
             }
             case 10: {
                 i = 1;
+                setColor(i);
+                digitalWrite(LAMP_SIX, HIGH);
                 break;
             }
         }
