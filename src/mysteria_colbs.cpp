@@ -433,7 +433,7 @@ void fail() {
 
         setDefault();
 
-        setColorRGB(1, 255, 0, 0);
+        setColorAll(0, 255, 0);
     }
 
     long diff = millis() - failStartTime;
@@ -441,7 +441,7 @@ void fail() {
     if (diff > 500) {
         if (failPosition > 5) {
             if (diff > 2000) {
-                setColorRGB(1, 0, 0, 0);
+                setColorAll(0, 0, 0);
                 Serial.println("exit fail loop");
                 failMode = false;
             }
@@ -449,12 +449,12 @@ void fail() {
             Serial.println("fail loop");
             if ((failPosition % 2) == 1) {
                 Serial.println("set fail red");
-                setColorRGB(1, 255, 0, 0);
+                setColorAll(0, 255, 0);
                 failPosition++;
                 failStartTime = millis();
             } else {
                 Serial.println("set fail off");
-                setColorRGB(1, 0, 0, 0);
+                setColorAll(0, 0, 0);
                 failPosition++;
                 failStartTime = millis();
             }
