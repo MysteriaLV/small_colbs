@@ -406,7 +406,7 @@ void success() {
         Serial.println("end game - relay open");
         successMode = true;
         successStartTime = millis();
-        setColorAll(0, 255, 0);
+        setColorAll(255, 0, 0);
         digitalWrite(RELAY_ONE_PIN, HIGH);
         return;
     }
@@ -418,6 +418,10 @@ void success() {
         setDefault();
         setColorAll(0, 0, 0);
         successMode = false;
+
+        statusStart = 0;
+
+        setDefault();
     }
 }
 
@@ -425,6 +429,7 @@ void fail() {
     modbus_set(COMPLETE, 0);
 
     if (!failMode) {
+        failPosition = 0;
         Serial.println("fail called");
         failMode = true;
         failStartTime = millis();
